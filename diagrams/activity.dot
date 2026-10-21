@@ -1,0 +1,22 @@
+digraph Activity {
+    rankdir=TB;
+    node [shape=box, style=rounded, fontname="Arial"];
+
+    start [shape=ellipse, label="Начало"];
+    n1 [shape=parallelogram, label="Получить команду пользователя"];
+    n2 [label="Определить текущий статус"];
+    n3 [label="Проверить допустимость перехода\n(согласно таблице переходов)"];
+    n4 [shape=diamond, label="Переход допустим?"];
+    n5 [label="Проверить данные операции\n(причина >= 10 символов, дата окончания прошла)"];
+    n6a [label="Изменить состояние заявки"];
+    n6b [label="Зафиксировать ошибку\nбез изменения объекта"];
+    end [shape=ellipse, label="Завершение"];
+
+    start -> n1 -> n2 -> n3 -> n4;
+    n4 -> n5 [label="да"];
+    n4 -> n6b [label="нет"];
+    n5 -> n6a [label="корректно"];
+    n5 -> n6b [label="ошибка"];
+    n6a -> end;
+    n6b -> end;
+}

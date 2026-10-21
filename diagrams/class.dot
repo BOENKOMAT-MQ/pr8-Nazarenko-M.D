@@ -1,0 +1,30 @@
+digraph ClassDiagram {
+    rankdir=TB;
+    node [shape=record, fontname="Arial"];
+
+    TripStatus [label="{TripStatus|{
+        DRAFT\l
+        SUBMITTED\l
+        APPROVED\l
+        REJECTED\l
+        CANCELLED\l
+        COMPLETED\l
+    }}"];
+
+    BusinessTrip [label="{BusinessTrip|{
+        -id: String\l
+        -purpose: String\l
+        -startDate: LocalDate\l
+        -endDate: LocalDate\l
+        -status: TripStatus\l
+        -rejectionReason: String\l
+        |+submit()\l
+        +approve()\l
+        +reject(String)\l
+        +cancel()\l
+        +complete()\l
+        +getDurationDays(): long\l
+    }}"];
+
+    BusinessTrip -> TripStatus [label="uses"];
+}
